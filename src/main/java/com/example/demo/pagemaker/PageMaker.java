@@ -61,17 +61,33 @@ public class PageMaker {
 	public int getStartPage() {
 		return startPage;
 	}
-
+	/*
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
+	}*/
+	public void setStartPage(int currentBlock) {
+		this.startPage = (currentBlock +5)-4;
+		//1 2 3 4 5
+		//6 7 8 9 10
+		//11 12 13 
 	}
 
 	public int getEndPage() {
 		return endPage;
 	}
-
+/*
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
+	}
+*/
+	
+	public void setEndPage(int getLastBlock, int getCurrentBlock) {
+		if(getLastBlock == getCurrentBlock) {
+			this.endPage = calcpage(getTotalCount(), getContentNum());//페이지 개수를 끝페이지로 지정
+		}
+		else {
+			this.endPage = getStartPage()+4;//시작 페이지 + 4를 끝페이지로 지정
+		}
 	}
 
 	public boolean isPrev() {
@@ -94,16 +110,30 @@ public class PageMaker {
 		return currentBlock;
 	}
 
-	public void setCurrentBlock(int currentBlock) {
-		this.currentBlock = currentBlock;
+	public void setCurrentBlock(int pageNum) {//페이지 번호 5 들어옴
+		//페이지 번호를 통해서 구함
+		//페이지 번호 / 페이지 그룹 안의 개수
+		//1p 1/5 -> 0.2
+		//5p 5/5 -> 1 -> 나머지는 0
+		//this.currentBlock = currentBlock;
+		this.currentBlock = pageNum/5;
+		if(pageNum%5>0) {
+			this.currentBlock++;
+			System.out.println(this.currentBlock); //5페이지로 갔는데 현재 블록이 증가하지 않음
+		}
 	}
 
 	public int getLastBlock() {
 		return lastBlock;
 	}
 
-	public void setLastBlock(int lastBlock) {
-		this.lastBlock = lastBlock;
+	public void setLastBlock(int totalCount) {
+		
+		//this.lastBlock = lastBlock;
+		this.lastBlock = totalCount/(5+this.contentNum);
+		if(totalCount % (5+this.contentNum)>0) {
+			this.lastBlock++;
+		}
 	}
 	
 	
