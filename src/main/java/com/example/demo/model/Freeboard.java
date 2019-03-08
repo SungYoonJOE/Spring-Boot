@@ -22,7 +22,7 @@ public class Freeboard {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
-	private Long bid;
+	private Long freeid;
 	
 	@Column(name="b_content")
 	private String content;
@@ -31,7 +31,7 @@ public class Freeboard {
 	private String title;
 	
 	@Column(name="b_pid")
-	private String bPid;
+	private String writer;
 	
 	
 

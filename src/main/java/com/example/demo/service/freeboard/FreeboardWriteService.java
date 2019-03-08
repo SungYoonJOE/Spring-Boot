@@ -18,11 +18,12 @@ public class FreeboardWriteService {
 		Freeboard freeboard = new Freeboard();
 		freeboard.setTitle(title);
 		freeboard.setContent(content);
-		freeboard.setBPid(writer);	
+		freeboard.setWriter(writer);	
 		
 		System.out.println("게시글 확인>>"+freeboard);
-		System.out.println("게시글 작성자>>"+freeboard.getBPid());
+		System.out.println("게시글 작성자>>"+freeboard.getWriter());
 		System.out.println(freeboard);
+		
 		freeboardRepository.save(freeboard);
 		
 	}

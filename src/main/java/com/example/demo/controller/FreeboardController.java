@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.service.freeboard.FreeboardInfoService;
 import com.example.demo.service.freeboard.FreeboardListService;
 import com.example.demo.service.freeboard.FreeboardWriteService;
 
@@ -26,6 +27,9 @@ public class FreeboardController {
 	
 	@Autowired
 	private FreeboardWriteService freeboardWriteService;
+	
+	@Autowired
+	private FreeboardInfoService freeboardInfoService;
 	
 	private int returnIntValue(String stringToInt){
 		return Integer.parseInt(stringToInt);
@@ -60,4 +64,12 @@ public class FreeboardController {
 		
 		return "redirect:/freeboard";//redirect 다음에 있는 freeboard를 찾아가게 됨
 	}
+	
+	//게시글 상세조회 요청이 들어올 때
+	@GetMapping("/freeBoardInfo")
+	public String getPost(@RequestParam(value = "freeId") String freeId) {
+		String page = freeboardInfoService.getFreeboardPost(freeId);
+		return page;
+	}
 }
+	

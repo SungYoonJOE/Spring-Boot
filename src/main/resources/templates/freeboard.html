@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Spring Boot로 게시판 만들기</title>
-  <meta http-equiv="Content-Type" charset="utf-8">
+  <meta content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -40,6 +40,14 @@
       .row.content {height:auto;} 
     }
   </style>
+  <script>
+  	function page(pageNum){ //해당 페이지 번호로 이동
+  		location.href="/freeboard?pageNum="+pageNum;
+  	}
+  	function getPost(freeid){
+  		location.href="/freeBoardInfo?freeId="+freeid;
+  	}
+  </script>
 </head>
 <body>
 
@@ -90,14 +98,24 @@
       		</tr>
       		<th:block th:if="${session.boardList!=null}">
       			<th:block th:each="board:${session.boardList}">
-      			<tr>
-	      			<td><span th:text="${board.getBid()}")></span></td>
-	      			<td><span th:text="${board.getTitle()}")></span></td>
-	      			<td><span th:text="${board.getBPid()}")></span></td>
-      			</tr>
+	      			<tr>
+		      			<td><span th:text="${board.getFreeid()}"></span></td>
+		      			<td><a th:onclick="|javascript:getPost('${board.getFreeid()}')|" th:text="${board.getTitle()}"></a></td>
+		      			<td><span th:text="${board.getWriter()}"></span></td>
+	      			</tr>
+      			</th:block>
       		</th:block>
       	</thead>
       </table>
+      
+    <!-- 페이지 번호 -->
+    <!-- 
+     <a th:if="${session.pageMaker.isPrev()}" style="text-decoration: none;" th:onclick="|javascript:page('${session.pageMaker.getStartPage()}')|">&laquo;</a>
+     <th:block th:each="pageNum:${#numbers.sequence(session.pageMaker.getStartPage(),session.pageMaker.getEndPage())}">
+                &nbsp;<a th:text="${pageNum}" th:onclick="|javascript:page('${pageNum}')|"></a>&nbsp;
+     </th:block>
+     <a th:if="${session.pageMaker.isNext()}" style="text-decoration: none;" th:onclick="|javascript:page('${session.pageMaker.getEndPage()}')|">&raquo;</a>
+    -->
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">

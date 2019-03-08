@@ -66,7 +66,7 @@ public class PageMaker {
 		this.startPage = startPage;
 	}*/
 	public void setStartPage(int currentBlock) {
-		this.startPage = (currentBlock +5)-4;
+		this.startPage = (currentBlock * 5)-4;
 		//1 2 3 4 5
 		//6 7 8 9 10
 		//11 12 13 
@@ -130,8 +130,8 @@ public class PageMaker {
 	public void setLastBlock(int totalCount) {
 		
 		//this.lastBlock = lastBlock;
-		this.lastBlock = totalCount/(5+this.contentNum);
-		if(totalCount % (5+this.contentNum)>0) {
+		this.lastBlock = totalCount/(5*this.contentNum);
+		if(totalCount % (5 * this.contentNum)>0) {
 			this.lastBlock++;
 		}
 	}

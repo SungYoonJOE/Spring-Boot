@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Freeboard;
+import com.example.demo.pagemaker.PageMaker;
 import com.example.demo.repository.FreeboardRepository;
 
 
@@ -21,14 +22,20 @@ public class FreeboardListService {
 	//만들어 놓은 repository 호출해서 사용
 	@Autowired		
 	private FreeboardRepository freeboardRepository;
+	
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private PageMakerService pageMakerService;
 	
 	//public List<Freeboard> freeboardList(int pageNum){
 	public String freeboardList(int pageNum) {
 		
+		PageMaker pageMaker = pageMakerService.generatePageMaker(pageNum, 10, freeboardRepository);
+		
 		//1페이지에 10개 freeid를 기준으로 내림차순 정렬(최신순)
-		PageRequest pageRequest = PageRequest.of(pageNum-1, 10, Sort.Direction.DESC, "bid");
+		PageRequest pageRequest = PageRequest.of(pageNum-1, 10, Sort.Direction.DESC, "freeid");
 		
 		//페이지를 return함
 		Page<Freeboard> freeboardPage = freeboardRepository.findAll(pageRequest);

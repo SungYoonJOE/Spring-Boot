@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Spring Boot로 게시판 만들기</title>
   <meta http-equiv="Content-Type" charset="utf-8">
@@ -84,7 +84,7 @@
       	<br><br>
       	<textarea placeholder="글 내용" name="content"></textarea>
       	<br><br>
-      	<input type="hidden" th:value="${session.loginUser.getUsername()}">
+      	<input type="hidden" name="writer" th:value="${session.loginUser.username}">
       	<input type="submit" value="글쓰기">
       </form>
       
