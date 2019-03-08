@@ -37,9 +37,11 @@ public class LoginService {
 		if(user == null) {
 			return "login";
 		}
-		
+		//session.loginUser.getUserName()
 		session.setAttribute("loginUser", user);
 		System.out.println("session user= "+session.getAttribute("loginUser"));
+		//System.out.println("session userName>> "+session.getAttribute("loginUser").);
+		//System.out.println("User의 이름만>>"+session.getAttribute("loginUser").getUsername());
 		
 		return "index";
 	}

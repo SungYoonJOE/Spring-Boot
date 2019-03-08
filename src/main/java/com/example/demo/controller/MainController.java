@@ -34,4 +34,9 @@ public class MainController {
 		System.out.println("로그아웃 확인>>"+session.getAttribute("loginUser"));
 		return "index";
 	}
+	
+	@GetMapping("/freeboardWritePage")
+	public String freeboardWritePage() {
+		return "freeboardWrite";
+	}
 }

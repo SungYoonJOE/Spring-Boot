@@ -28,7 +28,7 @@ public class FreeboardListService {
 	public String freeboardList(int pageNum) {
 		
 		//1페이지에 10개 freeid를 기준으로 내림차순 정렬(최신순)
-		PageRequest pageRequest = PageRequest.of(pageNum-1, 10, Sort.Direction.DESC, "freeid");
+		PageRequest pageRequest = PageRequest.of(pageNum-1, 10, Sort.Direction.DESC, "bid");
 		
 		//페이지를 return함
 		Page<Freeboard> freeboardPage = freeboardRepository.findAll(pageRequest);

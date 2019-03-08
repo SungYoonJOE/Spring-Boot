@@ -44,7 +44,7 @@ public class JoinService {
 		users.setUserid(userId);
 		users.setPassword(hashedPW);
 		users.setUsername(userName);
-		
+		       
 		userRepository.save(users);//데이터베이스에 저장하는 함수 save()
 		return "index";
 	}

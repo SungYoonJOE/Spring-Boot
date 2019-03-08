@@ -1,16 +1,17 @@
 package com.example.demo.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.model.Freeboard;
 import com.example.demo.service.freeboard.FreeboardListService;
+import com.example.demo.service.freeboard.FreeboardWriteService;
 
 
 
@@ -22,6 +23,9 @@ public class FreeboardController {
 	
 	@Autowired
 	private FreeboardListService freeboardListService;
+	
+	@Autowired
+	private FreeboardWriteService freeboardWriteService;
 	
 	private int returnIntValue(String stringToInt){
 		return Integer.parseInt(stringToInt);
@@ -40,5 +44,20 @@ public class FreeboardController {
 		*/
 		//return "freeboard";
 		return page;
+	}
+	
+	@PostMapping("/freeboardWriteRequest")
+	public String freeboardWriteRequest(@RequestParam Map<String, String> paramMap) {
+		String title = paramMap.get("title");
+		String content = paramMap.get("content");
+		String writer = paramMap.get("writer");
+		
+		System.out.println("title in html>>"+title);
+		System.out.println("content in html>>"+ content);
+		System.out.println("writer in html>>"+ writer);
+		
+		freeboardWriteService.write(title, content, writer);
+		
+		return "redirect:/freeboard";//redirect 다음에 있는 freeboard를 찾아가게 됨
 	}
 }

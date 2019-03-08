@@ -57,8 +57,6 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="#">게시판</a></li>
-        <!-- <li><a href="#">Projects</a></li>
-        <li><a href="#">Contact</a></li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <!-- <a href="/updatePage">회원정보 수정</a><br/><br/><br/> -->
@@ -80,24 +78,16 @@
     </div>
     <div class="col-sm-9 text-left"> 
       <h3>게시판</h3>
-      <a href="/freeboardWritePage">글쓰기</a>
-      <table>
-      	<thead>
-      		<tr>
-      			<th>&nbsp;&nbsp;글 번호&nbsp;&nbsp;</th>
-      			<th>&nbsp;&nbsp;글 제목&nbsp;&nbsp;</th>
-      			<th>&nbsp;&nbsp;글 작성자&nbsp;&nbsp;</th>
-      		</tr>
-      		<th:block th:if="${session.boardList!=null}">
-      			<th:block th:each="board:${session.boardList}">
-      			<tr>
-	      			<td><span th:text="${board.getBid()}")></span></td>
-	      			<td><span th:text="${board.getTitle()}")></span></td>
-	      			<td><span th:text="${board.getBPid()}")></span></td>
-      			</tr>
-      		</th:block>
-      	</thead>
-      </table>
+      <br/><br/>
+      <form action="/freeboardWriteRequest" method="post">
+      	<input type="text" placeholder="글 제목" name="title"/>
+      	<br><br>
+      	<textarea placeholder="글 내용" name="content"></textarea>
+      	<br><br>
+      	<input type="hidden" th:value="${session.loginUser.getUsername()}">
+      	<input type="submit" value="글쓰기">
+      </form>
+      
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">
