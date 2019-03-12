@@ -40,7 +40,9 @@
       .row.content {height:auto;} 
     }
   </style>
-  <script>
+</head>
+<body>
+<script>
   	function page(pageNum){ //해당 페이지 번호로 이동
   		location.href="/freeboard?pageNum="+pageNum;
   	}
@@ -48,9 +50,6 @@
   		location.href="/freeBoardInfo?freeId="+freeid;
   	}
   </script>
-</head>
-<body>
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -109,15 +108,33 @@
       </table>
       
     <!-- 페이지 번호 -->
+     <a th:if="${session.pageMaker.isPrev()}"
+      style="text-decoration: none;"
+      th:onclick="|javascript:page('${session.pageMaker.getStartPage()}')|">&laquo;</a>
+            <th:block
+               th:each="pageNum:${#numbers.sequence(session.pageMaker.getStartPage(),session.pageMaker.getEndPage())}">
+               &nbsp;<a th:text="${pageNum}"
+                  th:onclick="|javascript:page('${pageNum}')|"></a>&nbsp;
+           </th:block>
+            <a th:if="${session.pageMaker.isNext()}"
+               style="text-decoration: none;"
+               th:onclick="|javascript:page('${session.pageMaker.getEndPage()}')|">&raquo;</a>
+
+    
     <!-- 
     
-     <a th:if="${session.pageMaker.isPrev()}" style="text-decoration: none;" th:onclick="|javascript:page('${session.pageMaker.getStartPage()}')|">&laquo;</a>
+     <a th:if="${session.pageMaker.isPrev()}" 
+     style="text-decoration: none;" 
+     th:onclick="|javascript:page('${session.pageMaker.getStartPage()}')|">&laquo;</a>
      
-     <th:block th:each="pageNum:${#numbers.sequence(session.pageMaker.getStartPage(), session.pageMaker.getEndPage())}">
+     <th:block 
+     th:each="pageNum:${#numbers.sequence(session.pageMaker.getStartPage(), session.pageMaker.getEndPage())}">
                 &nbsp;<a th:text="${pageNum}" th:onclick="|javascript:page('${pageNum}')|"></a>&nbsp;
      </th:block>
      
-     <a th:if="${session.pageMaker.isNext()}" style="text-decoration: none;" th:onclick="|javascript:page('${session.pageMaker.getEndPage()}')|">&raquo;</a>
+     <a th:if="${session.pageMaker.isNext()}" 
+     style="text-decoration: none;" 
+     th:onclick="|javascript:page('${session.pageMaker.getEndPage()}')|">&raquo;</a>
     -->
     
     </div>
