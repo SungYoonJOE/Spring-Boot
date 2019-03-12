@@ -1,20 +1,4 @@
-<!-- <!DOCTYPE html>
-	<html>
-		<head>
-			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-			<title>로그인페이지</title>
-		</head>
-		<body>
-			<form action="/loginRequest" method="POST">
-			아이디 : <input type="text" name="user_id"></input><br/><br/>
-			비밀번호 : <input type="password" name="user_pw"></input><br/><br/>
-			<input type="submit" value="로그인"></input>
-		</form>
-		</body>
-	</html>
-	
-	<!DOCTYPE html>
-	-->
+<!DOCTYPE html>
 <html>
 <head>
   <title>Spring Boot로 게시판 만들기</title>
@@ -92,12 +76,19 @@
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
     </div>
+    
     <div class="col-sm-9 text-left"> 
-      <h1>로그인</h1>
-      <form action="/loginRequest" method="POST">
-		아이디 : <input type="text" name="user_id"></input><br/><br/>
-		비밀번호 : <input type="password" name="user_pw"></input><br/><br/>
-		<input type="submit" value="로그인"></input>
+      <h1>회원정보수정</h1>
+      <br />
+      <form action="/updateInfoRequest" method="POST">
+			아이디 : <input type="text" name="user_id" th:value="${session.loginUser.userid}"></input><br/><br/>
+			비밀번호 : <input type="password" name="user_pw"></input><br/><br/>
+			이름 : <input type="text" name="user_name" th:value="${session.loginUser.username}"></input><br/><br/>
+			<input type="submit" value="수정하기"></input>
+	</form>
+	<form action="/DeleteRequest" method="DELETE">
+		<input type="hidden" name="user_id" th:value="${session.loginUser.userid}"></input><br/><br/>
+		<input type="submit" value="삭제하기"></input>
 	</form>
     </div>
     <div class="col-sm-2 sidenav">

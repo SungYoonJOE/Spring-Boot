@@ -28,15 +28,21 @@ public class MainController {
 		return "login";
 	}
 
-	@GetMapping("/logout")
+	@GetMapping("/logoutPage")
 	public String logout() {
 		session.invalidate();
 		System.out.println("로그아웃 확인>>"+session.getAttribute("loginUser"));
 		return "index";
 	}
 	
+	@GetMapping("/updateInfoPage")
+	public String updateInfo() {
+		return "updateInfo";
+	}
+	
 	@GetMapping("/freeboardWritePage")
 	public String freeboardWritePage() {
 		return "freeboardWrite";
 	}
+	
 }

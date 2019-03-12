@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.service.JoinService;
 import com.example.demo.service.LoginService;
+import com.example.demo.service.UpdateService;
 
 
 @Controller
@@ -23,6 +24,9 @@ public class UsersController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private UpdateService updateUserService;
 	
 	//가입요청을 받을 때
 	/*
@@ -58,17 +62,15 @@ public class UsersController {
 		return page;
 	}
 	
-/*
-	//수정요청받을 때
-	@PostMapping("/updateRequest")
-	public String updateRequest(@RequestParam Map<String, String> paramMap) {
+	@PostMapping("/updateInfoRequest")
+	public String updateInfoRequest(@RequestParam Map<String, String> paramMap) {
 		String userId = paramMap.get("user_id");
 		String userPw = paramMap.get("user_pw");
 		String userName = paramMap.get("user_name");
 		
-		String page = joinService.joinUser(userId, userPw, userName);
-		
+		String page = updateUserService.updateUser(userId, userPw, userName);
+		System.out.println("수정 성공시 page 값 ="+page);
 		return page;
 	}
-	*/
+	
 }
