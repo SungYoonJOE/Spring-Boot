@@ -86,7 +86,7 @@
 			이름 : <input type="text" name="user_name" th:value="${session.loginUser.username}"></input><br/><br/>
 			<input type="submit" value="수정하기"></input>
 	</form>
-	<form action="/deleteRequest" method="DELETE">
+	<form action="/deleteRequest" method="POST">
 		<input type="hidden" name="user_id" th:value="${session.loginUser.userid}"></input><br/><br/>
 		<input type="submit" value="탈퇴하기"></input>
 	</form>

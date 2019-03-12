@@ -22,6 +22,7 @@ public class DeleteService {
 		Users user = (Users)session.getAttribute("loginUser");
 		
 		userRepository.delete(user);
+		//userRepository.deleteByUserid(userId);
 		System.out.println("탈퇴성공");
 		session.invalidate();
 		System.out.println("session이 널값어야함=");

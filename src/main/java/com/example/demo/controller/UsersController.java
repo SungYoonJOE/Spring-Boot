@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.repository.UsersRepository;
 import com.example.demo.service.DeleteService;
 import com.example.demo.service.JoinService;
 import com.example.demo.service.LoginService;
@@ -33,6 +36,12 @@ public class UsersController {
 	
 	@Autowired
 	private DeleteService deleteUserService;
+	
+	@Autowired
+	private UsersRepository userRepository;
+	
+	@Autowired
+	private HttpSession session;
 	
 	//가입요청을 받을 때
 	/*
@@ -93,9 +102,9 @@ public class UsersController {
 	/*
 	@DeleteMapping("/deleteRequest/{user_id}")
 	public String deleteRequest(@PathVariable String user_id) {
-		try {
-			Users user = 
-		}
+		userRepository.deleteByUserid(user_id);
+		session.invalidate();
+		String page = "index";
 		//session.invalidate();
 		return page;
 	}

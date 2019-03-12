@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 
 import com.example.demo.model.Users;
 
@@ -12,6 +13,8 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 		
 		Users findByUseridAndPassword(String userid, String userPw);
 		
+		@Modifying
+		void deleteByUserid(String userid);
 		
 		//List<Users> findByUseridAndPassword(String userId, String userPw);
 
