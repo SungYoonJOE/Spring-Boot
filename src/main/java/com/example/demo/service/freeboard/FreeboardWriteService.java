@@ -20,9 +20,9 @@ public class FreeboardWriteService {
 		freeboard.setContent(content);
 		freeboard.setWriter(writer);	
 		
-		System.out.println("게시글 확인>>"+freeboard);
-		System.out.println("게시글 작성자>>"+freeboard.getWriter());
-		System.out.println(freeboard);
+		//System.out.println("게시글 확인>>"+freeboard);
+		//System.out.println("게시글 작성자>>"+freeboard.getWriter());
+		//System.out.println(freeboard);
 		
 		freeboardRepository.save(freeboard);
 		

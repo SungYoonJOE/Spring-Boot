@@ -11,7 +11,7 @@ public class PageMaker {
 	private int currentBlock;//현재 페이지 블록
 	private int lastBlock; //마지막 페이지 블록
 	
-	public void preNext(int pageNum) {
+	public void prevNext(int pageNum) {
 		if(pageNum >0 && pageNum<6) {
 			setPrev(false);
 			setNext(true);

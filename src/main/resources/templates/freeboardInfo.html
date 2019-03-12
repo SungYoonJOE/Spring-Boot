@@ -82,12 +82,12 @@
             <p><a href="#">Link</a></p>
         </div>
         <div class="col-sm-8 text-left">
-            <h5 th:text="${session.freeboard.title}"></h5>
-
-            <br><br>
+      		<h5>글 제목</h5>
+      		<h5 th:text="${session.freeboard.title}"></h5>
             <textarea th:text="${session.freeboard.content}" readonly="readonly"></textarea>
 
             <br><br>
+            <h6>댓글</h6>
             <form id="freeboardComment0">
                 <input type="text" name="content"><br>
                 <input type="hidden" value="0" name="comment_origin_id">

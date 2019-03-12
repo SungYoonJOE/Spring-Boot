@@ -45,12 +45,14 @@ public class FreeboardListService {
 			//return new ArrayList<Freeboard>();//값은 있지만 크기가 0인 리스트를 반환
 			//new ArrayList<Freeboard>();
 			session.setAttribute("boardList", new ArrayList<Freeboard>());
+			session.setAttribute("pageMaker", pageMaker);
 			//return " ";
 			return "freeboard";
 		}
 		
 		List<Freeboard> freeboardList = freeboardPage.getContent();
 		session.setAttribute("boardList", freeboardList);
+		session.setAttribute("pageMaker", pageMaker);
 		
 		
 		//페이지가 2, 3, 4 만들 수 있게 해놓은 페이지 메이커는 다른 강좌에 있음 참고. 

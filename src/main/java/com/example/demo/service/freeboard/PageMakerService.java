@@ -18,7 +18,7 @@ public class PageMakerService {
 		pageMaker.setContentNum(contentNum); //한 페이지에 몇 개의 게시글을 보여줄지 지정
 		pageMaker.setCurrentBlock(pageNum); //현재 페이지 블록이 몇 번인지 현재 페이지 번호를 통해서 지정
 		pageMaker.setLastBlock(pageMaker.getTotalCount()); //마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
-		pageMaker.preNext(pageNum); //현재 페이지 번호로 화살표를 나타낼지 정한다.
+		pageMaker.prevNext(pageNum); //현재 페이지 번호로 화살표를 나타낼지 정한다.
 		pageMaker.setStartPage(pageMaker.getCurrentBlock()); //시작 페이지를 페이지 블록 번호로 정한다.
 		
 		// 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
