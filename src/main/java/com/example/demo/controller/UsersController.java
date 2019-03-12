@@ -98,15 +98,4 @@ public class UsersController {
 		//session.invalidate();
 		return page;
 	}
-	
-	/*
-	@DeleteMapping("/deleteRequest/{user_id}")
-	public String deleteRequest(@PathVariable String user_id) {
-		userRepository.deleteByUserid(user_id);
-		session.invalidate();
-		String page = "index";
-		//session.invalidate();
-		return page;
-	}
-	*/
 }
