@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.model.Freeboard;
 
 public interface FreeboardRepository extends JpaRepository<Freeboard, Long> {
-		//Freeboard findByFreeid(Long freeid);
+		
+	Freeboard findByTitleAndWriter(String title, String writer);
 }

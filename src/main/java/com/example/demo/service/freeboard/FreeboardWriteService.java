@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 @Service
 public class FreeboardWriteService {
 
+	@Autowired
 	FreeboardRepository freeboardRepository;
 	
 	public void write(String title, String content, String writer) {

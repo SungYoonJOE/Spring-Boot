@@ -29,7 +29,6 @@ public class FreeboardInfoService {
 		
 		//지금 보고 있는 글 정보를 저장 
 		session.setAttribute("freeboard", freeboard);
-		//System.out.println( ((Freeboard)session.getAttribute("freeboard")).getFreeid() );
 		
 		return "freeboardInfo";
 	}

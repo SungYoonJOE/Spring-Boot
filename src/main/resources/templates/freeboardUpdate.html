@@ -82,15 +82,16 @@
         </div>
         <div class="col-sm-8 text-left">
       		<form action="/freeboardUpdateRequest" method="POST">
-      		<h5>글 제목</h5>
-      		<input type ="text" name="title" th:text="${session.freeboard.title}"></input>
-            <textarea th:text="${session.freeboard.content}"></textarea>
-			<input th:if="${session.loginUser.username}==${session.freeboard.writer}" type="submit" value="수정하기"></input>
+	      		<h5>글 제목</h5>
+	      		<input type="text" name="title" th:value="${session.freeboard.title}"><br/><br/>
+	            <input type="text" name="content" th:value="${session.freeboard.content}">
+	            <input type="hidden" name="writer" th:value="${session.loginUser.username}">
+	            <br/>
+	            <input type="submit" value="수정 하기"></input>
 			</form>
-			
-            <br><br>
+            <br>
             <h6>댓글</h6>
-            <form id="freeboardComment0">
+            <form id="freeboardComment">
                 <input type="text" name="content"><br>
                 <input type="hidden" value="0" name="comment_origin_id">
                 <input type="hidden" value="0" name="comment_level">

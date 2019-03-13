@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.service.freeboard.FreeboardInfoService;
 import com.example.demo.service.freeboard.FreeboardListService;
+import com.example.demo.service.freeboard.FreeboardUpdateService;
 import com.example.demo.service.freeboard.FreeboardWriteService;
 
 
@@ -30,6 +31,9 @@ public class FreeboardController {
 	
 	@Autowired
 	private FreeboardInfoService freeboardInfoService;
+	
+	@Autowired
+	private FreeboardUpdateService freeboardUpdateService;
 	
 	private int returnIntValue(String stringToInt){
 		return Integer.parseInt(stringToInt);
@@ -70,6 +74,18 @@ public class FreeboardController {
 	public String getPost(@RequestParam(value = "freeId") String freeId) {
 		String page = freeboardInfoService.getFreeboardPost(freeId);
 		return page;
+	}
+	
+	//게시글 수정요청이 들어올 때
+	@PostMapping("/freeboardUpdateRequest")
+	public String updateFreeboardInfo(@RequestParam Map<String, String> paramMap) {
+		String title = paramMap.get("title");
+		String content = paramMap.get("content");
+		String writer = paramMap.get("writer");
+		
+		freeboardUpdateService.update(title, content, writer);
+		 
+		return "redirect:/freeboard";
 	}
 }
 	

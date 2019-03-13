@@ -45,4 +45,9 @@ public class MainController {
 		return "freeboardWrite";
 	}
 	
+	@GetMapping("/freeboardUpdatePage")
+	public String freeboardUpdatePage() {
+		return "freeboardUpdate";
+	}
+	
 }

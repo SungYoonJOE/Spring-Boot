@@ -84,10 +84,11 @@
       		<h5>글 제목</h5>
       		<h5 th:text="${session.freeboard.title}"></h5>
             <textarea th:text="${session.freeboard.content}" readonly="readonly"></textarea>
-
-            <br><br>
+            <br>
+           	<button th:if="${session.loginUser.username}==${session.freeboard.writer}"><a href="/freeboardUpdatePage">글 수정하기</a></button>
+            <br>
             <h6>댓글</h6>
-            <form id="freeboardComment0">
+            <form id="freeboardComment">
                 <input type="text" name="content"><br>
                 <input type="hidden" value="0" name="comment_origin_id">
                 <input type="hidden" value="0" name="comment_level">
