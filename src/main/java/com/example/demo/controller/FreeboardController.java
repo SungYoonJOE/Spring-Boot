@@ -81,7 +81,10 @@ public class FreeboardController {
 	//게시글 상세조회 요청이 들어올 때
 	@GetMapping("/freeBoardInfo")
 	public String getPost(@RequestParam(value = "freeId") String freeId) {
-		String page = freeboardInfoService.getFreeboardPost(freeId);
+		//String page = freeboardInfoService.getFreeboardPost(freeId);
+		String page = freeboardInfoService.getFreeboardById(freeId);
+		
+		
 		return page;
 	}
 	

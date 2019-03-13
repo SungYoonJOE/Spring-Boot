@@ -11,10 +11,11 @@ import org.hibernate.annotations.DynamicInsert;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
-@Getter
 @Entity
+@NoArgsConstructor
 @DynamicInsert //insert할  때 null은 포함 안 됨.
 @Table(name="board")
 public class Freeboard {
@@ -24,15 +25,14 @@ public class Freeboard {
 	@Column(nullable = false)
 	private Long freeid;
 	
-	@Column(name="b_content")
+	@Column(name="content")
 	private String content;
 	
-	@Column(name="b_title")
+	@Column(name="title")
 	private String title;
 	
-	@Column(name="b_pid")
+	@Column(name="writer")
 	private String writer;
-	
 	
 
 }
