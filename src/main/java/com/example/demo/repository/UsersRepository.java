@@ -12,11 +12,13 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 		//public Users findByUserIdAndUserPw(String user_id, String user_pw);
 		
 		Users findByUseridAndPassword(String userid, String userPw);
+	
 		
-		@Modifying
-		void deleteByUserid(String userid);
+		Users findByUserid(String userid);
 		
 		//List<Users> findByUseridAndPassword(String userId, String userPw);
+		
+		Users findByPid(Long pid);
 
 
 }

@@ -14,18 +14,21 @@ public class DeleteService {
 	@Autowired
 	public UsersRepository userRepository;
 	
-	@Autowired
-	HttpSession session;
 	
 	public String deleteUser(String userId) {
 		
-		Users user = (Users)session.getAttribute("loginUser");
+		
+		Users user = userRepository.findByUserid(userId);
+		
+		System.out.println("deleteUserService1 "+userRepository.findByUserid(userId));
+		
+		System.out.println("deleteUserService2 = "+ user);
 		
 		userRepository.delete(user);
-		//userRepository.deleteByUserid(userId);
+
 		System.out.println("탈퇴성공");
-		session.invalidate();
-		System.out.println("session이 널값어야함=");
+
 		return "index";
 	}
 }
+

@@ -86,6 +86,7 @@
             <textarea th:text="${session.freeboard.content}" readonly="readonly"></textarea>
             <br>
            	<button th:if="${session.loginUser.username}==${session.freeboard.writer}"><a href="/freeboardUpdatePage">글 수정하기</a></button>
+           
             <br>
             <h6>댓글</h6>
             <form id="freeboardComment">

@@ -5,11 +5,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.model.Users;
 import com.example.demo.repository.UsersRepository;
 import com.example.demo.service.DeleteService;
 import com.example.demo.service.JoinService;
@@ -77,25 +77,50 @@ public class UsersController {
 		return page;
 	}
 	
-	//회원 정보 수정 요청
-	@PostMapping("/updateInfoRequest")
-	public String updateInfoRequest(@RequestParam Map<String, String> paramMap) {
-		String userId = paramMap.get("user_id");
-		String userPw = paramMap.get("user_pw");
-		String userName = paramMap.get("user_name");
-		
-		String page = updateUserService.updateUser(userId, userPw, userName);
-		System.out.println("수정 성공시 page 값 ="+page);
-		return page;
-	}
+	  //회원 정보 수정 요청  
+	 @PostMapping("/updateInfoRequest") 
+	 public String updateInfoRequest(@RequestParam Map<String, String> paramMap, @Autowired HttpSession session) { 
+	 	//String pid = paramMap.get("pid"); 
+	 	String userPw = paramMap.get("user_pw"); 
+	 	String userName = paramMap.get("user_name");
+	 	String userId = paramMap.get("user_id");
 	
+	 	
+	 	String page = updateUserService.updateUser(userId, userPw, userName);
+	 	
+	 	Users user = userRepository.findByUserid(userId);
+	 	
+	 	session.setAttribute("loginUser", user);
+	 	System.out.println("session에 새로 저장 = "+session.getAttribute("loginUser"));
+	 	System.out.println("수정 성공시 page 값 ="+page); 
+	 	return page;
+	 }
+
+	 
+	/*
+	//회원 정보 수정 요청
+		@PostMapping("/updateInfoRequest")
+		public String updateInfoRequest(@ModelAttribute Users user) {
+			String pid = user.pid;
+			String userPw = user.password;
+			String userName = user.username;
+			
+			String page = updateUserService.updateUser(pid, userPw, userName);
+			System.out.println("수정 성공시 page 값 ="+page);
+			return page;
+		}
+	*/
+	 
 	//회원탈퇴 요청
 	@PostMapping("/deleteRequest")
-	public String deleteRequest(@RequestParam Map<String, String> paramMap) {
+	public String deleteRequest(@RequestParam Map<String, String> paramMap, @Autowired HttpSession session) {
+		
 		String userId = paramMap.get("user_id");
 		
-		String page = deleteUserService.deleteUser("userId");
-		//session.invalidate();
+		System.out.println("userId in UserController = "+paramMap.get("user_id"));
+		
+		String page = deleteUserService.deleteUser(userId);
+		session.invalidate();
 		return page;
 	}
 }

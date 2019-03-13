@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Freeboard;
 import com.example.demo.model.Users;
 import com.example.demo.repository.UsersRepository;
 
@@ -16,38 +17,28 @@ public class UpdateService {
 	@Autowired
 	public UserPasswordHashClass userPasswordHashClass;
 	
-	@Autowired
-	HttpSession session;
-	
 	public String updateUser(String userId, String userPw, String userName) {
-		
-		if(userId.equals("")|| userPw.equals("")||userName.equals("")) { //비어있는 경우
+		if(userPw.equals("")||userName.equals("")) { //비어있는 경우
 			return "updateInfo"; //그대로 회원정보수정 페이지
 		}
 		
-		//Users user = 
+		Users user = userRepository.findByUserid(userId);
 		
-		//Users users = new Users();
-		//Users user = userRepository.findByUseridAndPassword(userId, userPw);
-		//Users user = userRepository.findByUseridAndPassword(userId, userPw);
-		Users user = (Users)session.getAttribute("loginUser");
-		System.out.println("updateService1 = "+user);		
+		System.out.println("updateUserService1 "+userRepository.findByUserid(userId));
+		
+		System.out.println("updateService2 = "+user);		
 		
 		String hashedPW = userPasswordHashClass.getSHA256(userPw);
 
-		user.setUserid(userId);
 		user.setPassword(hashedPW);
 		user.setUsername(userName);
 		System.out.println("updateService2 = "+user);
 		
 		userRepository.save(user);
-		session.setAttribute("loginUser", user);
 		
-		System.out.println("정보수정 후 loginUser="+session.getAttribute("loginUser"));
-		
+
 		
 		return "index";
 		
 	}
-	
 }

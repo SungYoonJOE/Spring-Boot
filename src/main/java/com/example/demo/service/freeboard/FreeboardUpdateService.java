@@ -14,22 +14,18 @@ public class FreeboardUpdateService {
 	@Autowired
 	FreeboardRepository freeboardRepository;
 	
-	@Autowired
-	HttpSession session;
+	//@Autowired
+	//HttpSession session;
 	
-	public void update(String title, String content, String writer) {
-		//Freeboard freeboard = freeboardRepository.findByTitleAndWriter(title, writer);
-		
-		//글 상세조회(FreeboardInfoService)에서 session에 저장한 freeboard
-		Freeboard freeboard = (Freeboard)session.getAttribute("freeboard");
+	public void update(String freeid, String title, String content, String writer) {
+		Long freeId = Long.parseLong(freeid);
+		Freeboard freeboard = freeboardRepository.findByFreeid(freeId);
 		
 		freeboard.setTitle(title);
 		freeboard.setContent(content);
 		freeboard.setWriter(writer);
 		
-		
 		freeboardRepository.save(freeboard);
-		session.setAttribute("freeboard", freeboard);
+		//session.setAttribute("freeboard", freeboard);
 	}
-	
 }

@@ -81,16 +81,16 @@
       <h1>회원정보수정</h1>
       <br />
       <form action="/updateInfoRequest" method="POST">
-			아이디 : <input type="text" name="user_id" th:value="${session.loginUser.userid}"></input><br/><br/>
+			아이디 : <input type="text" name="user_id" th:value="${session.loginUser.userid}" readonly="readonly"></input><br/><br/>
 			비밀번호 : <input type="password" name="user_pw"></input><br/><br/>
 			이름 : <input type="text" name="user_name" th:value="${session.loginUser.username}"></input><br/><br/>
 			<input type="submit" value="수정하기"></input>
-	</form>
-	<form action="/deleteRequest" method="POST">
-		<input type="hidden" name="user_id" th:value="${session.loginUser.userid}"></input><br/><br/>
-		<input type="submit" value="탈퇴하기"></input>
-	</form>
-    </div>
+		</form>
+		<form action="/deleteRequest" method="POST">
+			<input type="hidden" name="user_id" th:value="${session.loginUser.userid}"></input><br/><br/>
+			<input type="submit" value="탈퇴하기"></input>
+		</form>
+	</div>
     <div class="col-sm-2 sidenav">
       <div class="well">
         <p>ADS</p>

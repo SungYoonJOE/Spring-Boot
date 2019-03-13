@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.model.Freeboard;
+import com.example.demo.repository.FreeboardRepository;
+import com.example.demo.service.freeboard.FreeboardDeleteService;
 import com.example.demo.service.freeboard.FreeboardInfoService;
 import com.example.demo.service.freeboard.FreeboardListService;
 import com.example.demo.service.freeboard.FreeboardUpdateService;
@@ -34,6 +37,12 @@ public class FreeboardController {
 	
 	@Autowired
 	private FreeboardUpdateService freeboardUpdateService;
+	
+	@Autowired
+	private FreeboardDeleteService freeboardDeleteService;
+	
+	@Autowired
+	private FreeboardRepository freeboardRepository;
 	
 	private int returnIntValue(String stringToInt){
 		return Integer.parseInt(stringToInt);
@@ -78,13 +87,30 @@ public class FreeboardController {
 	
 	//게시글 수정요청이 들어올 때
 	@PostMapping("/freeboardUpdateRequest")
-	public String updateFreeboardInfo(@RequestParam Map<String, String> paramMap) {
+	public String updateFreeboardInfo(@RequestParam Map<String, String> paramMap, @Autowired HttpSession session) {
+		String freeId = paramMap.get("freeid");
 		String title = paramMap.get("title");
 		String content = paramMap.get("content");
 		String writer = paramMap.get("writer");
 		
-		freeboardUpdateService.update(title, content, writer);
+		freeboardUpdateService.update(freeId, title, content, writer);
+		
+		Long longFreeid = Long.parseLong(freeId);
+		
+		Freeboard freeboard = freeboardRepository.findByFreeid(longFreeid);
+		session.setAttribute("freeboard", freeboard);
 		 
+		return "redirect:/freeboard";
+	}
+		
+	//게시글 삭제 요청이 들어올 때
+	@PostMapping("/deleteFreeboardRequest")
+	public String deleteFreeboard(@RequestParam Map<String, String> paramMap) {
+
+		String freeId = paramMap.get("freeid");
+		
+		freeboardDeleteService.deleteFreeboard(freeId);
+		
 		return "redirect:/freeboard";
 	}
 }

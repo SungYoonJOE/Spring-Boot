@@ -29,7 +29,7 @@ public class FreeboardInfoService {
 		
 		//지금 보고 있는 글 정보를 저장 
 		session.setAttribute("freeboard", freeboard);
-		
+		System.out.println("글 상세조회에서 session에 freeboard저장"+session.getAttribute("freeboard"));
 		return "freeboardInfo";
 	}
 }
