@@ -6,17 +6,10 @@
     </select> -->
     
     <select id="selectFreeboardById" resultType="com.example.demo.model.Freeboard">
-    	SELECT TITLE
-              ,CONTENT
-              ,WRITER
-          FROM BOARD
-         WHERE ID = #{id}
+    	select title, content, writer from board where freeid = #{id}
     </select>
     <select id="selectAllFreeboard" resultType="com.example.demo.model.Freeboard">
-    	SELECT TITLE
-              ,CONTENT
-              ,WRITER
-          FROM BOARD
+    	select title, content, writer from board
     </select>
     <insert id="insertFreeboard">
     	INSERT INTO BOARD (TITLE, CONTENT, WRITER)

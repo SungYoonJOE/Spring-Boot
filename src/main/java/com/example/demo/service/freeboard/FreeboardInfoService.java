@@ -21,14 +21,14 @@ public class FreeboardInfoService {
 	private HttpSession session;
 	
 	@Autowired
-	FreeboardMapper freeboardMapper;
+	private FreeboardMapper freeboardMapper;
 	
 	
-	public String getFreeboardById(String strfreeid) {
-		Long freeId = Long.parseLong(strfreeid);
-		Freeboard freeboard = freeboardMapper.selectFreeboardById(freeId);
+	public String getFreeboardById(Long freeid) {
+		//Long freeId = Long.parseLong(strfreeid);
+		Freeboard freeboard = freeboardMapper.selectFreeboardById(freeid);
 		// 없는 게시글에 접근할 경우
-		if (freeboard == null) {
+		if(freeboard == null) {
 			return "freeboard";
 		}
 
@@ -37,12 +37,7 @@ public class FreeboardInfoService {
 		System.out.println("글 상세조회에서 session에 freeboard저장" + session.getAttribute("freeboard"));
 		return "freeboardInfo";
 	}
-
-	/*
-	public Freeboard getFreeboardById(Long freeid) {
-		return freeboardMapper.selectFreeboardById(freeid);
-	}
-	 */
+/*
 	public List<Freeboard> getAllFreeboard() {
 		return freeboardMapper.selectAllFreeboard();
 	}
@@ -50,8 +45,9 @@ public class FreeboardInfoService {
 	public void addFreeboard(Freeboard freeboard) {
 		freeboardMapper.insertFreeboard(freeboard);
 	}
+*/
 	 
-	/*
+/*
 	public String getFreeboardPost(String stringFreeId) {
 		Long freeId = Long.parseLong(stringFreeId);
 		Freeboard freeboard = freeboardRepository.findById(freeId).get();
@@ -69,5 +65,5 @@ public class FreeboardInfoService {
 		System.out.println("글 상세조회에서 session에 freeboard저장"+session.getAttribute("freeboard"));
 		return "freeboardInfo";
 	}
-	*/
+*/
 }

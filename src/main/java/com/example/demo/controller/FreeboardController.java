@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.mappers.FreeboardMapper;
 import com.example.demo.model.Freeboard;
 import com.example.demo.repository.FreeboardRepository;
 import com.example.demo.service.freeboard.FreeboardDeleteService;
@@ -43,6 +44,9 @@ public class FreeboardController {
 	
 	@Autowired
 	private FreeboardRepository freeboardRepository;
+	
+	@Autowired
+	private FreeboardMapper freeboardMapper;
 	
 	private int returnIntValue(String stringToInt){
 		return Integer.parseInt(stringToInt);
@@ -80,10 +84,19 @@ public class FreeboardController {
 	
 	//게시글 상세조회 요청이 들어올 때
 	@GetMapping("/freeBoardInfo")
-	public String getPost(@RequestParam(value = "freeId") String freeId) {
+	public String getPost(@RequestParam(value = "freeId") String freeId, @Autowired HttpSession session) {
 		//String page = freeboardInfoService.getFreeboardPost(freeId);
-		String page = freeboardInfoService.getFreeboardById(freeId);
-		
+		Long freeid = Long.parseLong(freeId);
+		System.out.println("freeid>>"+freeid);
+		//String page = freeboardInfoService.getFreeboardById(freeid);
+		//System.out.println("page1>>"+page);
+		Freeboard freeboard = freeboardMapper.selectFreeboardById(freeid);
+		if(freeboard == null ) {
+			String page = "freeboard";
+		}
+		session.setAttribute("freeboard", freeboard);
+		System.out.println("글 상세조회에서 session에 freeboard저장" + session.getAttribute("freeboard"));
+		String page = "freeboardInfo";
 		
 		return page;
 	}

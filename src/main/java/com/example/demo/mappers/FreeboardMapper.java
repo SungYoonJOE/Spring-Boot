@@ -10,10 +10,10 @@ import com.example.demo.model.Freeboard;
 @Mapper
 public interface FreeboardMapper {
 
-	public Freeboard selectFreeboardById(@Param(value="id") Long freeid);
+	public Freeboard selectFreeboardById(Long freeid);
 	
-	public List<Freeboard> selectAllFreeboard();
+	//public List<Freeboard> selectAllFreeboard();
 	
-	public void insertFreeboard(@Param(value="freeboard")Freeboard freeboard);
+	//public void insertFreeboard(@Param(value="freeboard")Freeboard freeboard);
 	
 }
