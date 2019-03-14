@@ -98,9 +98,6 @@
                 <button id="defaultCommentWrite">댓글 작성</button>
             </form>
             <div id="commentList">
-
-
-
             </div>
         </div>
 
@@ -110,7 +107,7 @@
             </div>
             <div class="well">
                 <p>ADS</p>
-            </div>
+            </div>,
         </div>
     </div>
 </div>
@@ -118,6 +115,25 @@
 <footer class="container-fluid text-center">
     <p>Footer Text</p>
 </footer>
-
+<script>
+	var newURL = window.location.href;
+	//var pathURL = window.location.path;
+	console.log(newURL);
+	
+	$(function(){
+		$.ajax({
+			type:"GET", //HTTP 요청 방식
+			url:newURL, 
+			dataType:"json",//서버에서 보내주는 데이터의 타입
+			success: function(data){
+				console.log(data);
+			},
+			error: function(request, error){
+				alert("message: go to console");
+				console.log("message: "+request.responseText)
+			}
+		})
+	})
+</script>
 </body>
 </html>

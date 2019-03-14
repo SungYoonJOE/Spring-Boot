@@ -6,7 +6,7 @@
     </select> -->
     
     <select id="selectFreeboardById" resultType="com.example.demo.model.Freeboard">
-    	select title, content, writer from board where freeid = #{id}
+    	select freeid, title, content, writer from board where freeid = #{id}
     </select>
     <select id="selectAllFreeboard" resultType="com.example.demo.model.Freeboard">
     	select title, content, writer from board
