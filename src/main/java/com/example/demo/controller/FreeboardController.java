@@ -106,7 +106,7 @@ public class FreeboardController {
 	@RequestMapping(value="/api/freeboardInfo", method=RequestMethod.GET, produces="application/json")
 	public @ResponseBody JSONObject getFreeboard(@RequestParam(value = "freeId") String freeId) {
 		Long freeid = Long.parseLong(freeId);
-		//Freeboard freeboard = freeboardMapper.selectFreeboardById(freeid);
+		
 		JSONObject jsonBoard = new JSONObject();
 		jsonBoard = freeboardInfoService.getFreeboardById(freeid);
 		System.out.println("여기까지?");
