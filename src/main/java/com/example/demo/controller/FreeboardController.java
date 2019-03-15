@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,22 +86,6 @@ public class FreeboardController {
 		return "redirect:/freeboard";//redirect 다음에 있는 freeboard를 찾아가게 됨
 	}
 
-	//게시글 상세조회 요청 page반환
-	//@GetMapping("/freeBoardInfo")
-	/*
-	@RequestMapping(value="/freeboardInfo", method=RequestMethod.GET)
-	public String getPost(String freeId, @Autowired HttpSession session) {
-		Long freeid = Long.parseLong(freeId);
-		Freeboard freeboard = freeboardMapper.selectFreeboardById(freeid);
-		if(freeboard == null ) {String page = "freeboard";}
-		session.setAttribute("freeboard", freeboard);
-		String page = "freeboardInfo";
-		
-		return page;
-	}
-	*/
-	
-
 	//게시글 상세조회 요청 page 반환
 	@GetMapping("/freeBoardInfo")
 	public String getPost(@RequestParam(value = "freeId") String freeId, @Autowired HttpSession session) {
@@ -115,29 +100,26 @@ public class FreeboardController {
 		String page = "freeboardInfo";
 		
 		return page;
-		//return "/freeboardInfo?freeId="+freeid;
 	}
 
-	
-/* 	
 	//게시글 상세조회 요청 데이터 반환
-	@RequestMapping(value="/api/freeboardInfo", method=RequestMethod.GET)
-	public @ResponseBody Freeboard getFreeboard(@RequestParam(value = "freeId") String freeId) {
+	@RequestMapping(value="/api/freeboardInfo", method=RequestMethod.GET, produces="application/json")
+	public @ResponseBody JSONObject getFreeboard(@RequestParam(value = "freeId") String freeId) {
 		Long freeid = Long.parseLong(freeId);
-		Freeboard freeboard = freeboardMapper.selectFreeboardById(freeid);
-		
-		if(freeboard == null ) {
+		//Freeboard freeboard = freeboardMapper.selectFreeboardById(freeid);
+		JSONObject jsonBoard = new JSONObject();
+		jsonBoard = freeboardInfoService.getFreeboardById(freeid);
+		System.out.println("여기까지?");
+
+		if(jsonBoard == null ) {
 			//null일 경우 
+			System.out.println("jsonBoard가 null");
 		}
-		
+			
 		//freeboard를 JSON으로 프론트에 주기
 		
-		return freeboard;
+		return jsonBoard;
 	}
-	
-*/
-	
-	
 	
 	//게시글 수정요청이 들어올 때
 	@PostMapping("/freeboardUpdateRequest")

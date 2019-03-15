@@ -49,6 +49,7 @@
   	
   	function getView(freeid){
   		location.href="/freeBoardInfo?freeId="+freeid;
+  		
   		//location.replace("freeboardInfo.html");
   		//location.href="/freeBoardInfo/freeId/"+freeid;
   	}
@@ -131,7 +132,7 @@
       			<th:block th:each="board:${session.boardList}">
 	      			<tr>
 		      			<td><span th:text="${board.getFreeid()}"></span></td>
-		      			<td><a th:onclick="|javascript:infoFreeboard('${board.getFreeid()}')|" th:text="${board.getTitle()}"></a></td>
+		      			<td><a th:onclick="|javascript:getView('${board.getFreeid()}')|" th:text="${board.getTitle()}"></a></td>
 		      			<td><span th:text="${board.getWriter()}"></span></td>
 	      			</tr>
       			</th:block>

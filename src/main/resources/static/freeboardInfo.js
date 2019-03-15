@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+/*
 $(document).ready(function () {
     $.ajax({
         url: "/freeboardCommentList",
@@ -39,3 +39,5 @@ $(document).ready(function () {
         });
     });
 });
+
+*/

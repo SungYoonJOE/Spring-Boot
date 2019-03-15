@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/freeboardInfo.js"></script>
+
     <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
@@ -82,23 +82,16 @@
         </div>
         <div class="col-sm-8 text-left">
       		<h5>글 제목</h5>
-      		<h5 th:text="${session.freeboard.title}"></h5>
-            <textarea th:text="${session.freeboard.content}" readonly="readonly"></textarea>
+      		<p id="boardTitle"></p>
+      		<br>
+      		<h5>내용</h5>
+            <textarea id="boardContent"  readonly="readonly"></textarea>
             <br>
            	<button th:if="${session.loginUser.username}==${session.freeboard.writer}"><a href="/freeboardUpdatePage">글 수정하기</a></button>
            
             <br>
             <h6>댓글</h6>
-            <form id="freeboardComment">
-                <input type="text" name="content"><br>
-                <input type="hidden" value="0" name="comment_origin_id">
-                <input type="hidden" value="0" name="comment_level">
-                <input type="hidden" th:value="${session.loginUser.username}" name="writer">
-                <input type="hidden" th:value="${session.freeboard.freeid}" name="freeId">
-                <button id="defaultCommentWrite">댓글 작성</button>
-            </form>
-            <div id="commentList">
-            </div>
+            
         </div>
 
         <div class="col-sm-2 sidenav">
@@ -118,21 +111,45 @@
 <script>
 	var newURL = window.location.href;
 	//var pathURL = window.location.path;
-	console.log(newURL);
+	
+	var url2 = decodeURIComponent(location.href);
+    // url이 encodeURIComponent 로 인코딩 되었을때는 다시 디코딩 해준다.
+    console.log("11 url2="+url2);
+    
+ // url이 encodeURIComponent 로 인코딩 되었을때는 다시 디코딩 해준다.
+    url2 = decodeURIComponent(url2);
+    console.log("22 url2="+url2);
+
+	console.log(newURL); //  http://localhost:8095/freeBoardInfo?freeId=13
+			
+	var newURL2 = window.location.pathname;
+	console.log("newURL2 path: "+ newURL2); // 결과   /freeBoardInfo
+	
+	var newURL3 = window.location.search;
+	console.log("newURL3 path: "+ newURL3); // 결과   ?freeId=15
+	
+	var freeid = newURL3.substring(newURL3.indexOf("=")+1, newURL3.length);
+	console.log("freeid>>>"+freeid);   //?뒤는 freeId=20  //= 뒤는 20
+	console.log(typeof(freeid));
 	
 	$(function(){
 		$.ajax({
 			type:"GET", //HTTP 요청 방식
-			url:newURL, 
-			dataType:"json",//서버에서 보내주는 데이터의 타입
+			//url:newURL, 
+			url: "/api/freeboardInfo",
+			//dataType:"application/json",//서버에서 보내주는 데이터의 타입
+			data: {"freeId" : freeid},
 			success: function(data){
 				console.log(data);
+
+				$("#boardTitle").text(data.title);
+				$("#boardContent").text(data.content);
 			},
 			error: function(request, error){
 				alert("message: go to console");
 				console.log("message: "+request.responseText)
 			}
-		})
+		});
 	})
 </script>
 </body>
