@@ -43,19 +43,10 @@ public class UsersController {
 	@Autowired
 	private HttpSession session;
 	
-	//가입요청을 받을 때
-	/*
-	@PostMapping("/joinRequest")
-	public String joinRequest(HttpServletRequest request) { //바람직한 방법 아님
-	HttpServletRequest request 또는 @RequestParam String userId, @RequestParam String userPw, @RequestParam String userName
-		JoinService joinService = new JoinService();
-		joinService.joinUser(request, userRepository);
-		return "main";
-	}
-	*/
-	
+	//가입요청을 받을 때	
 	@PostMapping("/joinRequest")
 	public String joinRequest(@RequestParam Map<String, String> paramMap) {
+		System.out.println("제대로 요청됐는지 확인");
 		String userId = paramMap.get("user_id");
 		String userPw = paramMap.get("user_pw");
 		String userName = paramMap.get("user_name");
@@ -95,21 +86,6 @@ public class UsersController {
 	 	System.out.println("수정 성공시 page 값 ="+page); 
 	 	return page;
 	 }
-
-	 
-	/*
-	//회원 정보 수정 요청
-		@PostMapping("/updateInfoRequest")
-		public String updateInfoRequest(@ModelAttribute Users user) {
-			String pid = user.pid;
-			String userPw = user.password;
-			String userName = user.username;
-			
-			String page = updateUserService.updateUser(pid, userPw, userName);
-			System.out.println("수정 성공시 page 값 ="+page);
-			return page;
-		}
-	*/
 	 
 	//회원탈퇴 요청
 	@PostMapping("/deleteRequest")
