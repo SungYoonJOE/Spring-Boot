@@ -5,9 +5,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Users;
 import com.example.demo.repository.UsersRepository;
@@ -45,6 +45,7 @@ public class UsersController {
 	
 	//가입요청을 받을 때	
 	@PostMapping("/joinRequest")
+	@ResponseBody//html이 아니라 json형식으로 반환
 	public String joinRequest(@RequestParam Map<String, String> paramMap) {
 		System.out.println("제대로 요청됐는지 확인");
 		String userId = paramMap.get("user_id");
@@ -55,9 +56,10 @@ public class UsersController {
 		System.out.println("성공시 page값=index >>"+page);
 		return page;
 	}
-	
+
 	//로그인 요청 받을 때
 	@PostMapping("/loginRequest") //비밀번호 암호화, 복구화 sha256사용 (해싱)
+	@ResponseBody
 	public String loginRequest(@RequestParam Map<String, String> paramMap) {
 		String userId = paramMap.get("user_id");
 		String userPw = paramMap.get("user_pw");

@@ -70,12 +70,13 @@
     <div > 
       <h1>회원가입</h1>
       <br />
-      <form action="/joinRequest" method="POST">
-			아이디 : <input type="text" name="user_id"></input><br/><br/>
-			비밀번호 : <input type="password" name="user_pw"></input><br/><br/>
-			이름 : <input type="text" name="user_name"></input><br/><br/>
-			<input type="submit" value="가입하기"></input>
-		</form>
+      <!-- <form action="/joinRequest" method="POST">-->
+      	<div>
+			아이디 : <input type="text" id="userid" name="user_id"></input><br/><br/>
+			비밀번호 : <input type="password" id="userpw" name="user_pw"></input><br/><br/>
+			이름 : <input type="text" id="username" name="user_name"></input><br/><br/>
+			<input id="btn_join" type="submit" value="가입하기"></input>
+		</div>
     </div>
   </div>
 </div>
@@ -84,7 +85,32 @@
   <p>Footer Text</p>
 </footer>
 <script>
-
+	$(function(){
+		$("#btn_join").click(function( event ){
+			//event.preventDefault(); // 기본 form(event)은 안 하겠다고 적어둠..
+			
+			var user_id = $("#userid").val();
+			var user_pw = $("#userpw").val();
+			var user_name = $("#username").val();		
+			data={"user_id" : user_id, "user_pw" : user_pw, "user_name" : user_name};
+			
+			$.ajax({
+				type: "POST",
+				url: "/joinRequest",
+				data: data,
+				async: true,
+				success:function(result){
+					if(result=="index"){
+						location.href="/";
+					}					
+				},
+				error:function(request, error){
+					alert("message:"+request.responseText);
+					console.log("message:"+request.responseText);
+				}
+			});	
+		});
+	});
 </script>
 </body>
 </html>

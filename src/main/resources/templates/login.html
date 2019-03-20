@@ -69,19 +69,46 @@
   <div >
     <div> 
       <h1>로그인</h1>
-      <form action="/loginRequest" method="POST">
-		아이디 : <input type="text" name="user_id"></input><br/><br/>
-		비밀번호 : <input type="password" name="user_pw"></input><br/><br/>
-		<input type="submit" value="로그인"></input>
-	</form>
-    </div>
+      <div>
+		아이디 : <input type="text" id="userid" name="user_id"></input><br/><br/>
+		비밀번호 : <input type="password" id="userpw" name="user_pw"></input><br/><br/>
+		<input type="submit" id="btn_login" value="로그인"></input>
+	</div>
+   </div>
   </div>
 </div>
 
 <footer>
   <p>Footer Text</p>
 </footer>
-
+<script>
+	$(function(){
+		$("#btn_login").click(function(){
+			var user_id = $("#userid").val();
+			var user_pw = $("#userpw").val();
+			
+			data={"user_id" : user_id, "user_pw" : user_pw};
+			$.ajax({
+				type: "POST",
+				url: "/loginRequest",
+				data: data,
+				async:false,
+				success:function(data1){
+					if(data1=="index"){
+						location.href="/";
+					}
+					else{
+						alert("로그인한 정보가 올바르지 않습니다.");
+					}	
+				},
+				error:function(request, error){
+					alert("message:"+request.responseText);
+				}
+			});
+			
+		});
+	});
+</script>
 
 </body>
 </html>
