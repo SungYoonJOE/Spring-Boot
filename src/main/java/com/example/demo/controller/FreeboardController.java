@@ -58,7 +58,7 @@ public class FreeboardController {
 	
 	//프론트에서 몇 페이지인지 보내줌. 보내준 값이 없을 경우 default는 1페이지
 	@GetMapping("/freeboard")
-	public String fboard(@RequestParam(value="pageNum", defaultValue = "1")String pageNum) {
+	public String fboard(@RequestParam(value="pageNum", defaultValue = "1") String pageNum) {
 		//List<Freeboard> freeboardList = freeboardListService.freeboardList(returnIntValue(pageNum));
 		String page = freeboardListService.freeboardList(returnIntValue(pageNum));
 		/*
